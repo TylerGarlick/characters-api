@@ -3,6 +3,7 @@ import { Server } from 'hapi';
 const server = new Server();
 
 const port = process.env.PORT || 4000;
+const env = process.env.NODE_ENV || 'development';
 
 server.connection({
   port, router: {
@@ -48,10 +49,16 @@ server.register([
       jsonEditor: true,
       documentationPath: '/',
       info: {
-        title: 'Example',
+        title: 'Character API',
         version: '1.0.0',
         description: 'An example api'
       }
+    }
+  },
+  {
+    register: require('hapi-router'),
+    options: {
+      routes: 'src/routes/**/*'
     }
   }
 ], err => {
