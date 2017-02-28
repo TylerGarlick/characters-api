@@ -37,6 +37,7 @@ export default [
         const { id } = req.params;
 
         const found = await characters.findOne({_id: id});
+        delete found._id;
         if(!found) {
           return reply(Boom.notFound('Character not found'));
         }

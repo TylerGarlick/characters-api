@@ -31,6 +31,7 @@ export default [
       async: async(req, reply) => {
         const { id } = req.params;
         const character = await characters.findOne({ _id: id });
+        delete character._id;
         if (!character) {
           return reply(Boom.notFound(`Character with ${id} not found.`))
         }
